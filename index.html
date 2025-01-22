@@ -16,6 +16,7 @@
 
     <label for="daySelect">Select A or B day:</label>
     <select id="daySelect">
+        <option value="">--Select--</option>
         <option value="A">A Day</option>
         <option value="B">B Day</option>
     </select>
@@ -23,6 +24,7 @@
     <div id="departmentSection" style="margin-top: 20px;">
         <label for="departmentSelect" id="departmentLabel">What department is your 3A class?</label>
         <select id="departmentSelect">
+            <option value="">--Select--</option>
             <option value="English">English</option>
             <option value="Math">Math</option>
             <option value="Social Studies">Social Studies</option>
@@ -57,6 +59,12 @@
             // Change department label based on A/B day
             departmentLabel.textContent = `What department is your 3${selectedDay} class?`;
 
+            // Ensure both selections are made
+            if (selectedDay === "" || selectedDepartment === "") {
+                resultSection.style.display = 'none';  // Hide the result if either selection is missing
+                return;
+            }
+
             // Initialize the result message
             let message = '';
 
@@ -69,7 +77,7 @@
 
             // Display the result message
             scheduleMessage.textContent = message;
-            resultSection.style.display = 'block';
+            resultSection.style.display = 'block';  // Show the result only when both selections are made
         }
     </script>
 </body>
