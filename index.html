@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lunch Schedule Finder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lunch Schedule Finder</h1>
+
+    <label for="daySelect">Select A or B day:</label>
+    <select id="daySelect">
+        <option value="A">A Day</option>
+        <option value="B">B Day</option>
+    </select>
+
+    <div id="departmentSection" style="margin-top: 20px;">
+        <label for="departmentSelect" id="departmentLabel">What department is your 3A class?</label>
+        <select id="departmentSelect">
+            <option value="English">English</option>
+            <option value="Math">Math</option>
+            <option value="Social Studies">Social Studies</option>
+            <option value="Other">Something else</option>
+        </select>
+    </div>
+
+    <div id="resultSection" style="margin-top: 20px; display: none;">
+        <h3>Your Schedule:</h3>
+        <p id="scheduleMessage"></p>
+    </div>
+
+    <script>
+        // Get references to the HTML elements
+        const daySelect = document.getElementById('daySelect');
+        const departmentSelect = document.getElementById('departmentSelect');
+        const departmentLabel = document.getElementById('departmentLabel');
+        const resultSection = document.getElementById('resultSection');
+        const scheduleMessage = document.getElementById('scheduleMessage');
+        const departmentSection = document.getElementById('departmentSection');
+
+        // Event listener to handle A/B day selection
+        daySelect.addEventListener('change', updateSchedule);
+
+        // Event listener to handle department selection
+        departmentSelect.addEventListener('change', updateSchedule);
+
+        function updateSchedule() {
+            const selectedDay = daySelect.value;
+            const selectedDepartment = departmentSelect.value;
+
+            // Change department label based on A/B day
+            departmentLabel.textContent = `What department is your ${selectedDay} class?`;
+
+            // Initialize the result message
+            let message = '';
+
+            // Determine schedule based on day and department
+            if (selectedDepartment === 'English' || selectedDepartment === 'Math' || selectedDepartment === 'Social Studies') {
+                message = `You have first lunch from 10:40 to 11:15, then your ${selectedDay} class from 11:15 to 12:40.`;
+            } else {
+                message = `You have your ${selectedDay} class from 10:45 to 12:10, then second lunch from 12:15 to 12:45.`;
+            }
+
+            // Display the result message
+            scheduleMessage.textContent = message;
+            resultSection.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
